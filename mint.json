@@ -44,9 +44,9 @@
       "group": "Free Resources",
       "pages": [
         {
-          "icon": "discord",
-          "group": "Discord API",
-          "pages": ["resources/discordapi/getstarted"]
+          "icon": "fly",
+          "group": "Noclip",
+          "pages": ["resources/noclip/getstarted", "resources/noclip/configurationguide"]
         }
       ]
     }
