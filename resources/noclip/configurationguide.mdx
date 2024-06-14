@@ -63,6 +63,18 @@ The keybind for the noclip to toggle
 Config.Keybind = 'F3' -- set this to false to disable
 ```
 
+Here's where you can change the notification system the current one is linked to ox_lib.
+
+```lua config.lua
+Config.Notification = function(message, title, type)
+    exports['ox_lib']:notify({
+        title = title or 'Notification',
+        description = message or '',
+        type = type or 'info'
+    })
+end
+```
+
 
 
 
