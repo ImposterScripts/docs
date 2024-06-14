@@ -75,14 +75,16 @@ Config.Notification = function(message, title, type)
 end
 ```
 
+Here's how you can change the text ui that shows the keys to manage the noclip you can change it in these function!
 
+```lua config.lua
+Config.ShowTextUi = function(message)
+    if not message then return end
 
+    exports['ox_lib']:showTextUI(message)
+end
 
-
-
-
-
-
-
-
-
+Config.HideTextUi = function()
+    exports['ox_lib']:hideTextUI()
+end
+```
