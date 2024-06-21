@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Imposter Scripts",
+  "name": "Juze.dev",
   "logo": {
     "dark": "/logo/logo.png",
     "light": "/logo/logo.png"
@@ -24,7 +24,7 @@
   ],
   "topbarCtaButton": {
     "name": "Support",
-    "url": "https://discord.gg/imposter"
+    "url": "https://discord.gg/juze"
   },
   "tabs": [
 
@@ -52,7 +52,6 @@
     }
   ],
   "footerSocials": {
-    "github": "https://github.com/ImposterScripts",
-    "discord": "https://discord.gg/imposter"
+    "discord": "https://discord.gg/juze"
   }
 }
