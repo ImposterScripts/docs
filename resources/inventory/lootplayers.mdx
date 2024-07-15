@@ -1,0 +1,106 @@
+---
+title: 'Inventory Loot System Documentation (Server Side)'
+description: 'This documentation provides detailed information on the available exports in the inventory loot system. It includes functions to register loot bodies, retrieve registered loot, and check if a player is inside an inventory.'
+---
+
+## Exports
+
+### `registerLoot`
+
+**Description:**
+Registers a loot body with specific parameters and access control.
+
+**Usage:**
+```lua
+local success = exports['juze-inventory']:registerLoot(args, canOpen)
+```
+
+**Parameters:**
+
+- `args` (table): A table containing the loot body details.
+  - `index` (string): A unique identifier for the loot body.
+  - `blacklistedItems` (table, optional): A list of item names that are blacklisted for this loot body.
+  
+- `canOpen` (function): A function that determines if a player can open the loot body. The function receives two parameters, `player` and `target`, and should return a boolean value.
+  - `player` (number): The player ID of the person trying to open the loot body.
+  - `target` (number): The player ID of the target whose inventory is being looted.
+
+**Returns:**
+- `success` (boolean): Returns `true` if the loot body was registered successfully, `false` otherwise.
+
+**Example:**
+```lua
+local success = exports['juze-inventory']:registerLoot({
+    index = 'police',
+    blacklistedItems = {'money', 'rare_key'}
+}, function(player, target)
+    local xPlayer = ESX.GetPlayerFromId(player)
+    local tPlayer = ESX.GetPlayerFromId(target)
+    if not xPlayer or not tPlayer then return false end
+    if tPlayer.getJob().name == 'police' or xPlayer.getJob().name ~= 'police' then
+        return false
+    end
+    return true
+end)
+
+if success then
+    print('Police loot registered successfully')
+end
+```
+
+### `getRegistredLoot`
+
+**Description:**
+Retrieves the details of a registered loot body.
+
+**Usage:**
+```lua
+local lootDetails = exports['juze-inventory']:getRegistredLoot(index)
+```
+
+**Parameters:**
+
+- `index` (string): The unique identifier for the loot body.
+
+**Returns:**
+- `lootDetails` (table/boolean): Returns a table containing the loot body details if found, `false` otherwise.
+
+**Example:**
+```lua
+local lootDetails = exports['juze-inventory']:getRegistredLoot('police')
+if lootDetails then
+    print('Loot details retrieved:', lootDetails)
+else
+    print('No registered loot found for this index')
+end
+```
+
+### `isPlayerInsideInventory`
+
+**Description:**
+Checks if a player is currently viewing another player's inventory.
+
+**Usage:**
+```lua
+local isInside = exports['juze-inventory']:isPlayerInsideInventory(src, target)
+```
+
+**Parameters:**
+
+- `src` (number): The player ID of the person checking.
+- `target` (number): The player ID of the target whose inventory status is being checked.
+
+**Returns:**
+- `isInside` (boolean): Returns `true` if the player is inside the target's inventory, `false` otherwise.
+
+**Example:**
+```lua
+local isInside = exports['juze-inventory']:isPlayerInsideInventory(source, target)
+if isInside then
+    print('Player is inside the target inventory')
+else
+    print('Player is not inside the target inventory')
+end
+```
+
+This documentation covers the exports available for the inventory loot system and provides examples of how to use them in your scripts. Make sure to replace `'juze-inventory'` with the actual name of your resource when using the exports.

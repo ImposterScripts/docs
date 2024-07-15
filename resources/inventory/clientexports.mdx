@@ -1,0 +1,154 @@
+---
+title: 'Inventory System Exports Documentation'
+description: 'This document provides detailed descriptions and usage examples for the exports available in the inventory system. These functions allow for toggling the inventory UI, updating items, opening and closing various inventories, and more.'
+---
+
+## Exports
+
+### `createItemNotification`
+
+**Description:**
+Creates a notification for an item.
+
+**Usage:**
+```lua
+exports['juze-inventory']:createItemNotification(item, changed)
+```
+
+**Parameters:**
+
+- `item` (table): The item to be notified about.
+- `changed` (string): Text describing the change (e.g., "added", "removed").
+
+**Example:**
+```lua
+exports['juze-inventory']:createItemNotification({name = 'water', count = 1}, 'added')
+```
+
+### `refreshPlayerItems`
+
+**Description:**
+Requests the server to refresh the player's items.
+
+**Usage:**
+```lua
+exports['juze-inventory']:refreshPlayerItems()
+```
+
+**Example:**
+```lua
+exports['juze-inventory']:refreshPlayerItems()
+```
+
+### `openInventory`
+
+**Description:**
+Opens the player's inventory UI.
+
+**Usage:**
+```lua
+local success = exports['juze-inventory']:openInventory(label)
+```
+
+**Parameters:**
+
+- `label` (string): The label to display when opening the inventory.
+
+**Returns:**
+- `success` (boolean): Returns `true` if the inventory was opened successfully, `false` otherwise.
+
+**Example:**
+```lua
+local success = exports['juze-inventory']:openInventory('Main Inventory')
+if success then
+    print('Inventory opened successfully')
+else
+    print('Failed to open inventory')
+end
+```
+
+### `closeInventory`
+
+**Description:**
+Closes the currently open inventory UI.
+
+**Usage:**
+```lua
+exports['juze-inventory']:closeInventory()
+```
+
+**Example:**
+```lua
+exports['juze-inventory']:closeInventory()
+```
+
+### `openTrunk`
+
+**Description:**
+Opens the trunk inventory of the closest vehicle.
+
+**Usage:**
+```lua
+exports['juze-inventory']:openTrunk()
+```
+
+**Example:**
+```lua
+exports['juze-inventory']:openTrunk()
+```
+
+### `openGlovebox`
+
+**Description:**
+Opens the glovebox inventory of the vehicle the player is in.
+
+**Usage:**
+```lua
+exports['juze-inventory']:openGlovebox()
+```
+
+**Example:**
+```lua
+exports['juze-inventory']:openGlovebox()
+```
+
+### `openPlayerInventory`
+
+**Description:**
+Opens the inventory of another player.
+
+**Usage:**
+```lua
+exports['juze-inventory']:openPlayerInventory(target, index)
+```
+
+**Parameters:**
+
+- `target` (number): The server ID of the target player.
+- `index` (string): An index to uniquely identify the interaction.
+
+**Example:**
+```lua
+local targetPlayer = 1 -- Example target player ID
+local index = 'search1' -- Example index
+exports['juze-inventory']:openPlayerInventory(targetPlayer, index)
+```
+
+### `openStash`
+
+**Description:**
+Opens a stash inventory with a specific index.
+
+**Usage:**
+```lua
+exports['juze-inventory']:openStash(index)
+```
+
+**Parameters:**
+
+- `index` (string): The unique identifier for the stash.
+
+**Example:**
+```lua
+exports['juze-inventory']:openStash('stash1')
+``

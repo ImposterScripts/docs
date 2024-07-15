@@ -1,0 +1,245 @@
+---
+title: 'Configuration Guide'
+---
+
+### Shared Config Tags Guide
+
+#### `coreResource`
+Specifies the name of the core resource your inventory system depends on.
+
+```lua
+shared_config.coreResource = 'es_extended'
+```
+- **Feature**: Indicates the core resource dependency.
+- **Usage**: Replace `'es_extended'` with the actual name of your core resource if different.
+  
+---
+
+#### `oldESX`
+Specifies if your server is using an older version of ESX.
+
+```lua
+shared_config.oldESX = false
+```
+- **Feature**: Flags if the server uses an older version of ESX.
+- **Usage**: Set to `true` if using an older ESX version; `false` otherwise.
+
+---
+
+#### `enableScreenBlur`
+Enables screen blur effect when opening the inventory.
+
+```lua
+shared_config.enableScreenBlur = false
+```
+- **Feature**: Adds a visual effect to the screen when opening the inventory.
+- **Usage**: Set to `true` to enable screen blur; `false` to disable.
+
+---
+
+#### `openCommand`
+Sets the command to open the inventory.
+
+```lua
+shared_config.openCommand = 'inventory'
+```
+- **Feature**: Defines the command to open the inventory.
+- **Usage**: Players type `/inventory` (or another specified command) to open the inventory.
+
+---
+
+#### `openKey`
+Sets the keybind to open the inventory.
+
+```lua
+shared_config.openKey = 'F2'
+```
+- **Feature**: Assigns a key to open the inventory.
+- **Usage**: Players press 'F2' (or another specified key) to open the inventory.
+
+---
+
+#### `cannotOpenStates`
+Function to determine if the inventory cannot be opened in certain states.
+
+```lua
+shared_config.cannotOpenStates = function()
+    local ped = PlayerPedId()
+    return IsEntityDead(ped) or IsPedFatallyInjured(ped) or IsPedFalling(ped)
+end
+```
+- **Feature**: Checks conditions where the inventory should not open (e.g., player is dead, fatally injured, or falling).
+- **Usage**: Prevents opening the inventory during specified conditions.
+
+---
+
+#### `isInventoryBusy`
+Function to check if the inventory is currently busy (e.g., during a progress animation).
+
+```lua
+shared_config.isInventoryBusy = function()
+    return exports['ox_lib']:progressActive()
+end
+```
+- **Feature**: Checks if an ongoing action prevents inventory access.
+- **Usage**: Allows or blocks inventory access based on current activities.
+
+---
+
+#### `beforeOpen`
+Function executed before opening the inventory (e.g., displaying a progress circle).
+
+```lua
+shared_config.beforeOpen = function(label)
+    if exports['ox_lib']:progressCircle({
+        duration = 700,
+        label = label and label or 'Opening Inventory',
+        position = 'bottom',
+        useWhileDead = false,
+        canCancel = true,
+        disable = {
+            combat = true,
+        },
+        anim = {
+            dict = 'pickup_object',
+            clip = 'putdown_low'
+        },
+    }) then
+        return true
+    end
+
+    return false
+end
+```
+- **Feature**: Executes a visual cue or preparation before inventory opens.
+- **Usage**: Provides feedback or initiates an animation to indicate inventory opening.
+
+---
+
+#### `closeOnUse`
+Items that automatically close the inventory when used.
+
+```lua
+shared_config.closeOnUse = {
+    'armour',
+    'medkit',
+    'clip'
+}
+```
+- **Feature**: Defines items that close the inventory upon use.
+- **Usage**: Improves gameplay flow by automatically closing the inventory after using specified items.
+
+---
+
+#### `notification`
+Function to display notifications to the player.
+
+```lua
+shared_config.notification = function(message)
+    ESX.ShowNotification(message)
+end
+```
+- **Feature**: Shows messages to inform players about events.
+- **Usage**: Alerts players about inventory-related actions or updates.
+
+---
+
+#### `trunks`
+Configuration for vehicle trunks.
+
+```lua
+shared_config.trunks = {
+    enabled = true,
+    command = 'opentrunk',
+    keybind = 'H',
+    vehicleNeedsToBeUnlocked = true,
+    blacklisted_items = {
+        'legendary_key',
+    },
+}
+```
+- **Feature**: Enables and configures interactions with vehicle trunks.
+- **Usage**: Defines settings such as command, keybind, unlock requirements, and blacklisted items for trunk access.
+
+---
+
+#### `gloveboxes`
+Configuration for vehicle gloveboxes.
+
+```lua
+shared_config.gloveboxes = {
+    enabled = true,
+    vehicleNeedsToBeUnlocked = false,
+    blacklisted_items = {
+        'legendary_key',
+    },
+}
+```
+- **Feature**: Enables and configures interactions with vehicle gloveboxes.
+- **Usage**: Sets options like unlock requirements and items not allowed in gloveboxes.
+
+---
+
+### Server Config Tags Guide
+
+#### `token`
+Discord bot token for logging (optional).
+
+```lua
+server_config.token = ''
+```
+- **Feature**: Discord bot token for logging inventory actions.
+- **Usage**: Integrates inventory logs with Discord for real-time updates (optional).
+
+---
+
+#### `guild`
+Discord guild ID for logging (optional).
+
+```lua
+server_config.guild = ''
+```
+- **Feature**: Discord guild ID for logging inventory actions.
+- **Usage**: Links inventory logs to a specific Discord server (optional).
+
+---
+
+#### `discordLog`
+Settings for Discord logging.
+
+```lua
+server_config.discordLog = {
+    avatar = '',
+    embedColor = '0',
+    embedTitle = 'Inventory Logs',
+    embedFooter = 'Inventory'
+}
+```
+- **Feature**: Customizes appearance and content of Discord log messages.
+- **Usage**: Formats log messages with specific colors, titles, and footers for clarity and organization.
+
+---
+
+#### `logs`
+Logging messages for different inventory actions.
+
+```lua
+server_config.logs = {
+    trashitem = '',
+    giveitem = '',
+    inserttoglovebox = '',
+    removefromglovebox = '',
+    removefromtrunk = '',
+    inserttotrunk = '',
+    tookitemfromplayer = '',
+    putbackitemtoplayer = '',
+}
+```
+- **Feature**: Defines messages logged for each inventory action.
+- **Usage**: Records detailed information about item transactions, vehicle interactions, and player inventory changes.
+
+---
+
+### Summary
+
+These configurations provide comprehensive control over your FiveM server's inventory system. Adjust settings, functions, and messages to suit your server's gameplay mechanics and preferences. Ensure proper integration and testing to maintain a smooth and immersive experience for your players. Adjustments can be made to tailor the inventory system to specific server requirements and enhance gameplay dynamics.

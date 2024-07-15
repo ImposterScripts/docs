@@ -1,0 +1,145 @@
+---
+title: 'Exports Documentation (Server Side)'
+description: 'This documentation provides detailed information on the available exports in the inventory stash system. These exports allow for interaction with stashes and their related functionalities.'
+---
+
+## Table of Contents
+
+1. exports['juze-inventory']:doesStashExist()
+2. exports['juze-inventory']:loadstashes()
+3. exports['juze-inventory']:createStash()
+4. exports['juze-inventory']:getStash()
+5. exports['juze-inventory']:deleteStash()
+
+---
+
+### 1. `doesStashExist`
+
+**Description:**
+Checks if a stash with a given index exists.
+
+**Usage:**
+
+```lua
+local exists = exports['juze-inventory']:doesStashExist(index)
+```
+
+**Parameters:**
+- `index` (string): The index of the stash to check.
+
+**Returns:**
+- `exists` (boolean): Returns `true` if the stash exists, `false` otherwise.
+
+---
+
+### 2. `loadstashes`
+
+**Description:**
+Loads all stashes from the database and initializes them.
+
+**Usage:**
+
+```lua
+exports['juze-inventory']:loadstashes()
+```
+
+**Parameters:**
+- None
+
+**Returns:**
+- None
+
+---
+
+### 3. `createStash`
+
+**Description:**
+Creates a new stash with the specified index and owner.
+
+**Usage:**
+
+```lua
+exports['juze-inventory']:createStash(index, owner)
+```
+
+**Parameters:**
+- `index` (string): The index of the new stash.
+- `owner` (string): The owner of the new stash. If no owner is specified, it will be set to an empty string.
+
+**Returns:**
+- None
+
+---
+
+### 4. `getStash`
+
+**Description:**
+Retrieves a stash by its index.
+
+**Usage:**
+
+```lua
+local stash = exports['juze-inventory']:getStash(index)
+```
+
+**Parameters:**
+- `index` (string): The index of the stash to retrieve.
+
+**Returns:**
+- `stash` (table|nil): Returns the stash table if it exists, or `nil` if it does not.
+
+---
+
+### 5. `deleteStash`
+
+**Description:**
+Deletes a stash with the specified index.
+
+**Usage:**
+
+```lua
+local success, message = exports['juze-inventory']:deleteStash(index)
+```
+
+**Parameters:**
+- `index` (string): The index of the stash to delete.
+
+**Returns:**
+- `success` (boolean): Returns `true` if the stash was successfully deleted, `false` otherwise.
+- `message` (string): A message indicating the result of the operation. If the stash does not exist, the message will be 'Stash does not exist'.
+
+---
+
+## Example Usage
+
+Here are some examples of how to use the exports in your code:
+
+```lua
+-- Check if a stash exists
+local exists = exports['juze-inventory']:doesStashExist('stash1')
+if exists then
+    print('Stash exists!')
+else
+    print('Stash does not exist.')
+end
+
+-- Load all stashes
+exports['juze-inventory']:loadstashes()
+
+-- Create a new stash
+exports['juze-inventory']:createStash('ambulance_stash', 'ambulance')
+
+-- Get a stash
+local stash = exports['juze-inventory']:getStash('ambulance_stash')
+if stash then
+    stash.addItem('money', 2000000)
+else
+    print('Stash not found.')
+end
+
+-- Delete a stash
+local success, message = exports['juze-inventory']:deleteStash('ambulance_stash')
+print(message)
+```
+
+This concludes the documentation for the available exports in the inventory stash system. Use these exports to interact with the stash functionalities effectively.
