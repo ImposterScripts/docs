@@ -46,7 +46,7 @@
         {
           "icon": "box",
           "group": "juze-inventory",
-          "pages": ["resources/noclip/getstarted", "resources/noclip/configurationguide"]
+          "pages": ["resources/inventory/getstarted", "resources/inventory/configuration"]
         }
       ]
     },
