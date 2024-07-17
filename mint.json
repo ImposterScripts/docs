@@ -46,13 +46,7 @@
         {
           "icon": "box",
           "group": "juze-inventory",
-          "pages": [
-            "resources/inventory/getstarted", 
-            "resources/noclip/configuration",
-            "resources/noclip/clientexports",
-            "resources/noclip/stash",
-            "resources/noclip/lootplayers"
-          ]
+          "pages": ["resources/noclip/getstarted", "resources/noclip/configurationguide"]
         }
       ]
     },
