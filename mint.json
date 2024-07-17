@@ -46,7 +46,7 @@
         {
           "icon": "box",
           "group": "juze-inventory",
-          "pages": ["resources/inventory/getstarted", "resources/inventory/configuration"]
+          "pages": ["resources/inventory/getstarted", "resources/inventory/configuration", "resources/inventory/clientexports", "resources/inventory/stash", "resources/inventory/lootplayers"]
         }
       ]
     },
